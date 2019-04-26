@@ -2,7 +2,7 @@
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-  . /etc/bashrc
+        . /etc/bashrc
 fi
 
 # User specific aliases and functions
@@ -34,7 +34,7 @@ alias ls='ls --color=auto'
 alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
-alias ll='ls -altr'
+alias ll='ls -al'
 alias _='sudo'
 
 #folders
@@ -58,10 +58,11 @@ alias LDAP="cd /secbin/security/Scripts/LDAP/"
 alias INSTALL="cd /secbin/security/Scripts/Unix/Install/"
 alias CDIRECT="cd /secbin/security/Sectransport/Cdirect/bin/"
 alias OAM="cd /secbin/security/Scripts/Unix/OAM_ADMINISTRATION/"
-alias GPWD="cd /secbin/security/Scripts/Unix/Gpwd/"
+alias GPWD="cd /secbin/security/Scripts/get_passwd_tools/"
 alias TOOLS="cd /secbin/security/Scripts/get_passwd_tools/"
 alias BASH="cd /secbin/security/Scripts/Library/"
-
+alias LOG="cd /secbin/log/"
+alias REPO="cd /secbin/security/users_repository"
 # git
 alias glg='git log --oneline --decorate --graph --all'
 
@@ -81,29 +82,44 @@ COLOR_WHITE="\033[0;37m"
 COLOR_WHITEB="\033[1;37m"
 COLOR_RESET="\033[0m"
 
-function git_color() {
-  local git_status="$(git status 2>/dev/null)"
-  if [[ $git_status =~ "Untracked files" ]] ; then
-    echo -e $COLOR_RED
-  elif [[ $git_status =~ "nothing to commit" ]] ; then
-    echo -e $COLOR_WHITE
-  elif [[ $git_status =~ "to be committed" ]] ; then
-    echo -e $COLOR_GREEN
-  else
-    echo -e $COLOR_OCHRE
-  fi
-}
+#function git_color() {
+#  local git_status="$(git status 2>/dev/null)"
+#  if [[ $git_status =~ "Untracked files" ]] ; then
+#    echo -e $COLOR_RED
+#  elif [[ $git_status =~ "nothing to commit" ]] ; then
+#    echo -e $COLOR_WHITE
+#  elif [[ $git_status =~ "to be committed" ]] ; then
+#    echo -e $COLOR_GREEN
+#  else
+#    echo -e $COLOR_OCHRE
+#  fi
+#}
 
-parse_git_branch() {
-  local BRANCH=$(git symbolic-ref HEAD --short 2> /dev/null)
-  if [[ ! -z "$BRANCH" ]] ; then
-    echo "branch:$BRANCH "
-  fi
-}
+#parse_git_branch() {
+#  local BRANCH=$(git symbolic-ref HEAD --short 2> /dev/null)
+#  if [[ ! -z "$BRANCH" ]] ; then
+#    echo "branch:$BRANCH "
+#  fi
+#}
 
 # prompt part
-PS1="\[$COLOR_GREEN\]\u\[$COLOR_WHITE\]@\[$COLOR_RED\]\H:\[$COLOR_WHITEB\][\w]\n\[$COLOR_YELLOW\]jobs:\j "
-PS1+="\[\$(git_color)\]"          # colors git status
-PS1+="\$(parse_git_branch)"       # prints current branch
-PS1+="\[$COLOR_YELLOW\]\$\[$COLOR_RESET\] "
+#PS1="\[$COLOR_GREEN\]\u\[$COLOR_WHITE\]@\[$COLOR_RED\]\H:\[$COLOR_WHITEB\][\w]\n\[$COLOR_YELLOW\]jobs:\j "
+export PS1="\[\033[38;5;2m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;9m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\] [\W]: \[$(tput sgr0)\]"
+#PS1+="\[\$(git_color)\]"          # colors git status
+#PS1+="\$(parse_git_branch)"       # prints current branch
+#PS1+="\[$COLOR_YELLOW\]\$\[$COLOR_RESET\] "
 export PS1
+
+# SSH Name TMUX
+case "$TERM" in
+  tmux*)
+    export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}\007"'
+    ;;
+  xterm*)
+    if [ $ITERM_SESSION_ID ]; then
+      export PROMPT_COMMAND='echo -ne "\033];${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}\007"; '
+    else
+      export PROMPT_COMMAND='echo -ne "\033]${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}\007"; '
+    fi
+    ;;
+esac
