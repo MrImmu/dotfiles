@@ -102,7 +102,7 @@ COLOR_RESET="\033[0m"
 #  fi
 #}
 
-# prompt part
+# prompt of BACH part
 #PS1="\[$COLOR_GREEN\]\u\[$COLOR_WHITE\]@\[$COLOR_RED\]\H:\[$COLOR_WHITEB\][\w]\n\[$COLOR_YELLOW\]jobs:\j "
 export PS1="\[\033[38;5;2m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;9m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\] [\W]: \[$(tput sgr0)\]"
 #PS1+="\[\$(git_color)\]"          # colors git status
