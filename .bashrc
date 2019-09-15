@@ -15,7 +15,7 @@ umask 022
 #       . /root/.bash_profile
 # fi
 
-# Mode vi in shell 123456
+# Mode vi in shell 1234567
 #set -o vi
 
 USR_HOME="/usr/home/ni796admin"
