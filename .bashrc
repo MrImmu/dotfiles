@@ -3,50 +3,31 @@
 #######################################
 # Source global definitions
 #######################################
-#if [ -f /etc/bashrc ]; then
-#	. /etc/bashrc
-#fi
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
 
 #######################################
 # Umask + Variable
 #######################################
 umask 022
-# COLOR_RED="\001\e[38;5;9m\002"
-# COLOR_YELLOW="\001\e[0;33m\002"
-# COLOR_GREEN="\001\e[38;5;2m\002"
-# COLOR_OCHRE="\001\e[38;5;95m\002"
-# COLOR_BLUE="\001\e[0;34m\002"
-# COLOR_WHITE="\001\e[0;37m\002"
-# COLOR_WHITEB="\001\e[38;5;15m\002"
-# COLOR_RESET='\001$(tput sgr0)\002'
-
-#COLOR_RED="\001\e[38;5;9m\002"
-#COLOR_YELLOW="\001\e[38;5;11m\002"
-#COLOR_GREEN="\001\e[38;5;2m\002"
-#COLOR_OCHRE="\001\e[38;5;95m\002"
-#COLOR_BLUE="\001\e[38;5;33m\002"
-#COLOR_LIGHTGRAY="\001\e[0;37m\002"
-#COLOR_WHITE="\001\e[38;5;15m\002"
-#COLOR_RESET='\001$(tput sgr0)\002'
-
-#COLOR_RED="\001\e[38;5;1m\002"
-#COLOR_YELLOW="\001\e[38;5;3m\002"
-#COLOR_GREEN="\001\e[38;5;2m\002"
-#COLOR_OCHRE="\001\e[38;5;8m\002"
-#COLOR_BLUE="\001\e[38;5;4m\002"
-#COLOR_LIGHTGRAY="\001\e[0;37m\002"
-#COLOR_WHITE="\001\e[38;5;15m\002"
-#COLOR_RESET='\001$(tput sgr0)\002'
-
-
-COLOR_RED="\001\e[38;5;160m\002"
+COLOR_RED="\001\e[38;5;1m\002"
 COLOR_YELLOW="\001\e[38;5;3m\002"
-COLOR_GREEN="\001\e[38;5;40m\002"
+COLOR_GREEN="\001\e[38;5;2m\002"
 COLOR_OCHRE="\001\e[38;5;8m\002"
 COLOR_BLUE="\001\e[38;5;4m\002"
 COLOR_LIGHTGRAY="\001\e[0;37m\002"
 COLOR_WHITE="\001\e[38;5;15m\002"
 COLOR_RESET='\001$(tput sgr0)\002'
+
+#COLOR_RED="\001\e[38;5;160m\002"
+#COLOR_YELLOW="\001\e[38;5;3m\002"
+#COLOR_GREEN="\001\e[38;5;40m\002"
+#COLOR_OCHRE="\001\e[38;5;8m\002"
+#COLOR_BLUE="\001\e[38;5;4m\002"
+#COLOR_LIGHTGRAY="\001\e[0;37m\002"
+#COLOR_WHITE="\001\e[38;5;15m\002"
+#COLOR_RESET='\001$(tput sgr0)\002'
 
 #######################################
 # Alias
@@ -89,17 +70,12 @@ function parse_git_branch() {
 ##################################################
 # BACH Prompt
 ##################################################
-COLOR_GIT="$(git_color)"
-
-#set_bash_prompt(){
 PS1="$COLOR_GREEN\u$COLOR_RESET$COLOR_WHITE@$COLOR_RESET$COLOR_RED\h$COLOR_RESET$COLOR_WHITE [\W]$COLOR_RESET"
-#$COLOR_GIT\$(parse_git_branch)$COLOR_RESET $COLOR_YELLOW\$$COLOR_RESET "
 PS1+="\$(git_color)"                           # colors git status
 PS1+="\$(parse_git_branch)$COLOR_RESET"      # prints current branch
-#PS1+=" $COLOR_YELLOW\$$COLOR_RESET "
+PS1+=" $COLOR_YELLOW\$$COLOR_RESET "
 export PS1
-#}
-#PROMPT_COMMAND=set_bash_prompt
+
 
 ##################################################
 # SSH Name TMUX
