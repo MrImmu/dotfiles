@@ -1,9 +1,5 @@
 # .bashrc
 
-#if [ -f /usr/home/ni796admin/.bashrc ]; then
-#  . /usr/home/ni796admin/.bashrc
-#fi
-
 #######################################
 # Umask + Variable
 #######################################
@@ -15,7 +11,7 @@ COLOR_OCHRE="\001\e[38;5;8m\002"
 COLOR_BLUE="\001\e[38;5;4m\002"
 COLOR_LIGHTGRAY="\001\e[0;37m\002"
 COLOR_WHITE="\001\e[38;5;15m\002"
-COLOR_RESET='\001$(tput sgr0)\002'
+COLOR_RESET="\001$(tput sgr0)\002"
 
 #######################################
 # Alias
@@ -38,7 +34,7 @@ alias vimdev="vim $HOME/.vimrc"
 #######################################
 alias LIB="cd /secbin/security/Scripts/Library/"
 alias DRP="cd /secbin/security/Scripts/DRP"
-alias GPWD="cd /secbin/security/Scripts/get_passwd_tools/"
+alias GPWD="cd /secbin/security/Scripts/get_passwd_tools_2/"
 alias UHD='cd /secbin/security/Scripts/Helpdesk/UHD_PORTAL/'
 alias HOSTS="cd /secbin/security/Scripts/"
 alias IMPLEM="cd /secbin/security/Scripts/Implementation/"
@@ -54,6 +50,7 @@ alias SCRIPTS="cd /secbin/security/Scripts"
 alias SSH_KEYS="cd /secbin/security/Scripts/Unix/SSH_KEYS"
 alias SUPPORT='cd /secbin/security/Scripts/Support'
 alias UNIX="cd /secbin/security/Scripts/Unix"
+alias CMS="cd /secbin/security/cms_wrapper"
 
 #######################################
 # Oracle
@@ -92,29 +89,9 @@ function parse_git_branch() {
 ##################################################
 # BACH Prompt
 ##################################################a
-if [[  $EUID -ne 0 ]]; then
-  PS1="$COLOR_GREEN\u$COLOR_RESET$COLOR_WHITE@$COLOR_RESET$COLOR_RED\h$COLOR_RESET$COLOR_WHITE [\W]$COLOR_RESET"
-  PS1+="\$(git_color)"                        # colors git status
-  PS1+="\$(parse_git_branch)$COLOR_RESET"     # prints current branch
-  PS1+=" $COLOR_YELLOW\$$COLOR_RESET "        # $
+  PS1='`[ $(whoami) == "root" ] && echo -e "$COLOR_RED" || echo -e "$COLOR_GREEN"`'
+  PS1+="\u$COLOR_RESET$COLOR_WHITE@$COLOR_RESET$COLOR_RED\h$COLOR_RESET$COLOR_WHITE [\W]$COLOR_RESET"
+  PS1+='`[ ! $(id -u) == "0" ] && echo "\$(git_color)"`'
+  PS1+='`[ ! $(id -u) == "0" ] && echo "$(parse_git_branch)"`'
+  PS1+="$COLOR_RESET $COLOR_YELLOW\$$COLOR_RESET "         #$
   export PS1
-else
-  PS1="$COLOR_RED\u$COLOR_RESET$COLOR_WHITE@$COLOR_RESET$COLOR_RED\h$COLOR_RESET$COLOR_WHITE [\W]$COLOR_RESET"
-  PS1+=" $COLOR_YELLOW\$$COLOR_RESET "
-  export PS1
-fi
-
-##################################################
-# SSH Name TMUX
-##################################################
-#case "$TERM" in
-#            tmux*)
-#export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}\007"'
-#    ;;
-#      xterm*)
-# if [ $ITERM_SESSION_ID ]; then
-#     export PROMPT_COMMAND='echo -ne "\033];${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}\007"; '
-# else
-#  export PROMPT_COMMAND='echo -ne "\033]${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}\007"; '
-#fi
-#;;
