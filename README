@@ -1,6 +1,4 @@
 gruvbox.vim
 https://github.com/morhetz/gruvbox/blob/master/colors/gruvbox.vim
-ls –l /usr/share/vim/vim*/colors
-cd 
-vim gruvbox.vim
+vim /usr/share/vim/vim80/colors/gruvbox.vim
 (:set paste     :set nopaste)
