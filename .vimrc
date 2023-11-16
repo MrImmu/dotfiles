@@ -9,4 +9,5 @@ set showcmd             " show command in bottom bar
 set wildmenu            " visual autocomplete for command menu
 set showmatch           " highlight matching [{()}]
 set incsearch           " search as characters are entered
+set number relativenumber
 colorscheme gruvbox
