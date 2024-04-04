@@ -48,7 +48,8 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 alias df='df -h'
-alias glg='git log --oneline --decorate --graph'                                                                                                                                                                                             alias _='sudo'
+alias glg='git log --oneline --decorate --graph'
+alias _='sudo'
 alias tmuxc="tmux -f $HOME/tmux.conf"
 alias tmuxa='tmux attach'
 alias vimdev="vim $HOME/.vimrc"                                                                                                                                                                                                              
