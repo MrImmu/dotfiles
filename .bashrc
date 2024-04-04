@@ -14,7 +14,7 @@ then
 fi
 export PATH
 
-export TERM=screen-256color
+export TERM=xterm-256color
 
 #######################################
 # Umask + Variable
