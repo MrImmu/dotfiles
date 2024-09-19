@@ -29,6 +29,8 @@ alias vimdev="vim $HOME/.vimrc"
 #######################################
 # Alias Folder
 #######################################
+GIT_AUTHOR_NAME="ni796"
+GIT_AUTHOR_EMAIL="alexandre.martin@clearstream.com"
 
 function git_color() {
   local git_status="$(git status 2>/dev/null)"
