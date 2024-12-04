@@ -11,6 +11,19 @@ COLOR_BLUE="\001\e[38;5;4m\002"
 COLOR_LIGHTGRAY="\001\e[0;37m\002"
 COLOR_WHITE="\001\e[38;5;15m\002"
 COLOR_RESET="\001$(tput sgr0)\002"
+export TERM=xterm-256color
+
+#######################################
+# Source
+#######################################
+#. /etc/profile.d/tux_tools.sh
+PATH=/usr/home/sysadmin_unix_bau_13/scripts/shell:"$PATH"
+
+#######################################
+# Function
+#######################################
+function helptux { [ -f /sysadmin/automation/README.md ] && cat /sysadmin/automation/README.md; }
+
 #######################################
 # Alias
 #######################################
@@ -29,8 +42,10 @@ alias vimdev="vim $HOME/.vimrc"
 #######################################
 # Alias Folder
 #######################################
-GIT_AUTHOR_NAME="ni796"
-GIT_AUTHOR_EMAIL="alexandre.martin@clearstream.com"
+
+#######################################
+# Git
+#######################################
 
 function git_color() {
   local git_status="$(git status 2>/dev/null)"
@@ -56,9 +71,9 @@ function parse_git_branch() {
 ##################################################a
   PS1='`[ $(id -u) == "0" ] && echo -e "\001\e[38;5;1m\002" || echo -e "\001\e[38;5;2m\002"`'
   PS1+="\u$COLOR_WHITE@"
-  PS1+='`[[ $(domainname) == *bat* ]] && echo -e "\001\e[38;5;2m\002" || echo -e "\001\e[38;5;1m\002"`'
+  PS1+='`[[ $(domainname) == *prod* ]] && echo -e "\001\e[38;5;1m\002" || echo -e "\001\e[38;5;2m\002"`'
   PS1+="\h$COLOR_WHITE [\W]$COLOR_RESET"
-  PS1+='`[ ! $(id -u) == "0" ] && echo "\$(git_color)"`'
+  #PS1+='`[ ! $(id -u) == "0" ] && echo "\$(git_color)"`'
   PS1+='`[ ! $(id -u) == "0" ] && echo "$(parse_git_branch)"`'
   PS1+="$COLOR_YELLOW\$$COLOR_RESET "         #$
   export PS1
