@@ -1,0 +1,27 @@
+[global_config]
+  focus = system
+  enabled_plugins = CustomCommandsMenu, LaunchpadBugURLHandler, LaunchpadCodeURLHandler, APTURLHandler
+  always_split_with_profile = True
+  putty_paste_style = True
+  smart_copy = False
+[keybindings]
+  paste = <Shift>Insert
+  broadcast_off = <Primary><Shift>o
+  layout_launcher = <Primary><Shift><Alt>l
+[profiles]
+  [[default]]
+    background_darkness = 0.95
+    background_type = transparent
+    cursor_color = "#aaaaaa"
+    show_titlebar = False
+    palette = "#000000:#cd0000:#00cd00:#cdcd00:#0000ee:#cd00cd:#00cdcd:#e5e5e5:#7f7f7f:#ff0000:#00ff00:#ffff00:#5c5cff:#ff00ff:#00ffff:#ffffff"
+    copy_on_selection = True
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+[plugins]
