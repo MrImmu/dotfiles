@@ -17,7 +17,7 @@ export TERM=xterm-256color
 # Source
 #######################################
 #. /etc/profile.d/tux_tools.sh
-PATH=/usr/home/sysadmin_unix_bau_13/scripts/shell:"$PATH"
+PATH=/usr/home/ni796_t1/scripts/shell:"$PATH"
 
 #######################################
 # Function
